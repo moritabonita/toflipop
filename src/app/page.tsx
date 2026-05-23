@@ -41,7 +41,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="absolute bottom-8 text-center text-neutral-800 opacity-50 text-sm">
-        <p>Hecho con 💕 por Penélope para ToFlipop</p>
+        <p>Hecho con 💕 por Penélope Garcia para Toflipop</p>
       </footer>
     </main>
   );
