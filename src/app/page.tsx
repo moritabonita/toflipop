@@ -66,10 +66,12 @@ export default function Home() {
         {/* Admin Link */}
         <div className="mt-6 pt-6 border-t border-pastel-lavender">
           <a
-            href="/studio"
+            href="https://www.sanity.io/dashboard"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-action hover:bg-action-hover text-white font-semibold py-3 px-6 rounded-xl transition-colors"
           >
-            Ir al Panel de Administración
+            Ir al Panel de Administración (Sanity)
           </a>
         </div>
       </div>
