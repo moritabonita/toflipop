@@ -1,8 +1,8 @@
 # 🛍️ Plan de Desarrollo - Toflipop
 
-**Última actualización:** 24 de mayo de 2026 - Sesión actual
-**Estado general:** 🟢 En progreso - Catálogo conectado a Sanity
-**Última conversación:** Catálogo de productos funcional, pendiente crear primer producto publicado
+**Última actualización:** 24 de mayo de 2026 - Problemas resueltos
+**Estado general:** 🟢 En progreso - Primer producto visible en la web
+**Última conversación:** Corregidos 3 errores que impedían ver el producto publicado
 
 ---
 
@@ -40,9 +40,11 @@
 ## 🟡 En Progreso
 
 ### 5. Contenido en Sanity
-- [ ] **PRÓXIMO PASO:** Vanina debe crear y PUBLICAR su primer producto en Sanity Studio
-  - Nota: Al verificar vía API, no hay productos publicados todavía (count=0)
-  - Posible causa: Producto guardado como draft sin dar a "Publish"
+- [x] **RESUELTO:** Primer producto "Prueba 1" publicado y visible
+  - ✅ Corregido: Campo `mainImage` → `image` en las consultas GROQ (3 lugares)
+  - ✅ Corregido: Dataset privado → añadido token al cliente de lectura
+  - ✅ Corregido: CDN cache → cambiado `useCdn: false`
+  - Producto visible con imagen, precio (€12), categoría (notebook)
   - Studio: https://toflipop-studio.sanity.studio/
 
 ### 6. Desarrollo del Frontend
@@ -116,11 +118,11 @@
 
 ## 🎯 Próximos Pasos Inmediatos
 
-1. **PRIMERO:** Vanina crea y PUBLICA primer producto en Sanity Studio
-2. **SEGUNDO:** Verificar que el producto aparece en http://localhost:3000
-3. **TERCERO:** Crear más productos (3-5 para tener catálogo completo)
-4. **CUARTO:** Implementar carrito de compras
-5. **QUINTO:** Checkout con Stripe
+1. **HECHO:** Primer producto creado y visible ✅
+2. **PRÓXIMO:** Vanina crea más productos (3-5 para tener catálogo completo)
+3. **TERCERO:** Implementar carrito de compras
+4. **CUARTO:** Checkout con Stripe
+5. **QUINTO:** Deploy a producción (merge dev -> main)
 
 ---
 

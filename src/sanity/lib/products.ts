@@ -23,7 +23,7 @@ export async function getProducts(): Promise<Product[]> {
       category,
       description,
       featured,
-      "imageUrl": mainImage.asset->url
+      "imageUrl": image.asset->url
     }`
 
     const products = await client.fetch(query)
@@ -44,7 +44,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
       price,
       category,
       description,
-      "imageUrl": mainImage.asset->url
+      "imageUrl": image.asset->url
     }`
 
     const products = await client.fetch(query)
@@ -66,7 +66,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       category,
       description,
       featured,
-      "imageUrl": mainImage.asset->url
+      "imageUrl": image.asset->url
     }`
 
     const product = await client.fetch(query, { slug })
