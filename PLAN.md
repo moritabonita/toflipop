@@ -1,8 +1,8 @@
 # 🛍️ Plan de Desarrollo - Toflipop
 
 **Última actualización:** 24 de mayo de 2026 - Sesión actual
-**Estado general:** 🟢 En progreso - Sanity configurado y funcionando
-**Última conversación:** Deploy exitoso del Studio, primer producto creado, datasets limpios
+**Estado general:** 🟢 En progreso - Catálogo conectado a Sanity
+**Última conversación:** Catálogo de productos funcional, pendiente crear primer producto publicado
 
 ---
 
@@ -18,44 +18,44 @@
 ### 2. Resolución de Problemas Técnicos
 - [x] Eliminación de Sanity Studio local (error de compatibilidad con Next.js 16)
 - [x] Corrección de capitalización del nombre de la marca "Toflipop"
-- [x] Actualización del footer con nombre completo: "Hecho con 💕 por Penélope Garcia para Toflipop"
+- [x] Actualización del footer: "Hecho con 💕 por Penélope Garcia para Toflipop"
+- [x] Fix: .gitignore corrregido para excluir node_modules y archivos generados
 
-### 3. Estado Actual del Sitio
-- [x] Página "Coming Soon" profesional implementada
-- [x] Mensaje temporal mientras se desarrolla la tienda completa
-
-### 4. Sanity Studio (NUEVO ✅)
+### 3. Sanity Studio
 - [x] Studio desplegado en https://toflipop-studio.sanity.studio/
-- [x] Token de administrador configurado (Developer access)
-- [x] Dataset `production` eliminado (limpieza completada)
-- [x] Solo queda dataset `toflipop-production`
-- [x] Primer producto creado: "Anotador Floral" (€25, categoría: notebook)
+- [x] Token de administrador configurado
+- [x] Dataset limpio: solo `toflipop-production`
+- [x] Schemas configurados: product, post, blockContent
+
+### 4. Frontend - Catálogo de Productos (NUEVO ✅)
+- [x] `src/sanity/lib/products.ts` - Cliente Sanity + funciones para obtener productos
+- [x] `src/components/ProductCard.tsx` - Componente tarjeta de producto (diseño pastel)
+- [x] `src/app/page.tsx` - Página principal con catálogo conectado a Sanity
+- [x] `src/app/product/[slug]/page.tsx` - Página de detalle de producto
+- [x] Build exitoso y desplegado en rama `dev`
+- [x] Servidor local funcionando en http://localhost:3000
 
 ---
 
 ## 🟡 En Progreso
 
-### 5. Desarrollo del Frontend
-- [ ] Página de inicio (Home) con diseño atractivo
-- [ ] Catálogo de productos (anotadores y stickers)
-- [ ] Página de detalle de producto
+### 5. Contenido en Sanity
+- [ ] **PRÓXIMO PASO:** Vanina debe crear y PUBLICAR su primer producto en Sanity Studio
+  - Nota: Al verificar vía API, no hay productos publicados todavía (count=0)
+  - Posible causa: Producto guardado como draft sin dar a "Publish"
+  - Studio: https://toflipop-studio.sanity.studio/
+
+### 6. Desarrollo del Frontend
 - [ ] Carrito de compras
 - [ ] Proceso de checkout con Stripe
 - [ ] Diseño responsive para móviles
-
-### 6. Contenido y CMS (Sanity)
-- [x] Configurar schemas de productos en Sanity
-- [ ] Crear más productos de ejemplo
-- [ ] Subir imágenes de productos
-- [ ] Configurar páginas de contenido (About, Contact, FAQ)
-- [ ] Configurar blog (opcional para SEO)
+- [ ] Páginas de contenido (About, Contact, FAQ)
 
 ### 7. Integración de Pagos
 - [ ] Configurar Stripe en modo test
 - [ ] Implementar flujo de pago completo
-- [ ] Configurar webhooks para confirmación de pedidos
+- [ ] Webhooks para confirmación de pedidos
 - [ ] Página de confirmación de pedido
-- [ ] Email de confirmación (opcional)
 
 ---
 
@@ -89,7 +89,7 @@
 - [ ] Testing en dispositivos móviles
 - [ ] Testing del proceso de compra completo
 - [ ] Corrección de bugs
-- [ ] Deploy a producción
+- [ ] Deploy a producción (merge dev -> main)
 - [ ] Verificación final del dominio
 
 ---
@@ -116,12 +116,12 @@
 
 ## 🎯 Próximos Pasos Inmediatos
 
-1. **Prioridad Alta:** Crear 3-5 productos de ejemplo en Sanity (Vanina practica)
-2. **Prioridad Alta:** Desarrollar página de inicio con catálogo conectado a Sanity
-3. **Prioridad Media:** Implementar carrito y checkout
-4. **Prioridad Media:** Cumplimiento legal (RGPD, LSSI-CE)
-5. **Prioridad Baja:** SEO y marketing
+1. **PRIMERO:** Vanina crea y PUBLICA primer producto en Sanity Studio
+2. **SEGUNDO:** Verificar que el producto aparece en http://localhost:3000
+3. **TERCERO:** Crear más productos (3-5 para tener catálogo completo)
+4. **CUARTO:** Implementar carrito de compras
+5. **QUINTO:** Checkout con Stripe
 
 ---
 
-*Este plan se actualizará automáticamente a medida que avancemos. 💫*
+*Este plan se actualiza cada sesión. 💫*
