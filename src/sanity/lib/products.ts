@@ -9,7 +9,9 @@ export interface Product {
   category: string
   description?: string
   featured?: boolean
-  imageUrl?: string
+  imageUrls: string[]
+  compareAtPrice?: number
+  stock?: number
 }
 
 // Obtener todos los productos publicados
@@ -23,7 +25,9 @@ export async function getProducts(): Promise<Product[]> {
       category,
       description,
       featured,
-      "imageUrl": image.asset->url
+      compareAtPrice,
+      stock,
+      "imageUrls": [image.asset->url, ...gallery[].asset->url]
     }`
 
     const products = await client.fetch(query)
@@ -44,7 +48,10 @@ export async function getFeaturedProducts(): Promise<Product[]> {
       price,
       category,
       description,
-      "imageUrl": image.asset->url
+      featured,
+      compareAtPrice,
+      stock,
+      "imageUrls": [image.asset->url, ...gallery[].asset->url]
     }`
 
     const products = await client.fetch(query)
@@ -66,7 +73,9 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       category,
       description,
       featured,
-      "imageUrl": image.asset->url
+      compareAtPrice,
+      stock,
+      "imageUrls": [image.asset->url, ...gallery[].asset->url]
     }`
 
     const product = await client.fetch(query, { slug })

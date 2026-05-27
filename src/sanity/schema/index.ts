@@ -185,6 +185,86 @@ export const post = defineType({
   },
 })
 
+// Schema for Orders (from Stripe webhooks)
+export const order = defineType({
+  name: 'order',
+  title: 'Pedido',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'orderNumber',
+      title: 'Número de pedido',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'stripeSessionId',
+      title: 'Session ID de Stripe',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'customerEmail',
+      title: 'Email del cliente',
+      type: 'string',
+      validation: (Rule) => Rule.required().email(),
+    }),
+    defineField({
+      name: 'items',
+      title: 'Productos del pedido',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'name', title: 'Nombre', type: 'string' },
+            { name: 'quantity', title: 'Cantidad', type: 'number' },
+            { name: 'price', title: 'Precio unitario (€)', type: 'number' },
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: 'subtotal',
+      title: 'Subtotal (€)',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(0),
+    }),
+    defineField({
+      name: 'shipping',
+      title: 'Envío (€)',
+      type: 'number',
+    }),
+    defineField({
+      name: 'total',
+      title: 'Total (€)',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(0),
+    }),
+    defineField({
+      name: 'status',
+      title: 'Estado del pedido',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Pendiente', value: 'pending' },
+          { title: 'Confirmado', value: 'confirmed' },
+          { title: 'Enviado', value: 'shipped' },
+          { title: 'Entregado', value: 'delivered' },
+          { title: 'Cancelado', value: 'cancelled' },
+        ],
+      },
+      initialValue: 'pending',
+    }),
+    defineField({
+      name: 'createdAt',
+      title: 'Fecha del pedido',
+      type: 'datetime',
+      initialValue: () => new Date().toISOString(),
+    }),
+  ],
+})
+
 // Block content type for blog posts
 export const blockContent = defineType({
   name: 'blockContent',

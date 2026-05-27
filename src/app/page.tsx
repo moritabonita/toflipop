@@ -32,7 +32,7 @@ export default async function Home() {
       </div>
 
       {/* Catálogo de Productos */}
-      <div className="w-full max-w-6xl">
+      <div className="w-full max-w-6xl" id="productos">
         <h2 className="text-3xl font-bold text-center mb-8 text-neutral-800">
           🛍️ Nuestros Productos
         </h2>
@@ -42,11 +42,12 @@ export default async function Home() {
             {products.map((product) => (
               <ProductCard
                 key={product._id}
+                _id={product._id}
                 name={product.name}
                 slug={product.slug}
                 price={product.price}
                 category={product.category}
-                imageUrl={product.imageUrl}
+                imageUrls={product.imageUrls}
               />
             ))}
           </div>
@@ -66,10 +67,26 @@ export default async function Home() {
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="mt-16 text-center text-neutral-800 opacity-50 text-sm">
-        <p>Hecho con 💕 por Penélope Garcia para Toflipop</p>
-      </footer>
+      {/* Info de envío */}
+      <div className="w-full max-w-6xl mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-pastel-lavender/50 text-center">
+            <div className="text-4xl mb-3">🚚</div>
+            <h3 className="font-semibold text-neutral-800 mb-2">Envío rápido</h3>
+            <p className="text-neutral-600 text-sm">3-5 días en península</p>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-pastel-lavender/50 text-center">
+            <div className="text-4xl mb-3">↩️</div>
+            <h3 className="font-semibold text-neutral-800 mb-2">14 días para devolver</h3>
+            <p className="text-neutral-600 text-sm">Derecho de desistimiento</p>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-pastel-lavender/50 text-center">
+            <div className="text-4xl mb-3">🔒</div>
+            <h3 className="font-semibold text-neutral-800 mb-2">Pago seguro</h3>
+            <p className="text-neutral-600 text-sm">Protegido por Stripe</p>
+          </div>
+        </div>
+      </div>
     </main>
   )
 }

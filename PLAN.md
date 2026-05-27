@@ -1,8 +1,8 @@
 # 🛍️ Plan de Desarrollo - Toflipop
 
-**Última actualización:** 24 de mayo de 2026 - Problemas resueltos
-**Estado general:** 🟢 En progreso - Primer producto visible en la web
-**Última conversación:** Corregidos 3 errores que impedían ver el producto publicado
+**Última actualización:** 27 de mayo de 2026 - Build exitoso en producción local, todos los errores de TypeScript corregidos
+**Estado general:** 🟢 Servidor producción corriendo en http://172.31.82.232:3000
+**Última conversación:** Corregidos errores de tipado de params en Next.js 16 (blog/[slug], product/[slug]), eliminado archivo residual config.ts. Build 17/17 páginas OK.
 
 ---
 
@@ -19,7 +19,7 @@
 - [x] Eliminación de Sanity Studio local (error de compatibilidad con Next.js 16)
 - [x] Corrección de capitalización del nombre de la marca "Toflipop"
 - [x] Actualización del footer: "Hecho con 💕 por Penélope Garcia para Toflipop"
-- [x] Fix: .gitignore corrregido para excluir node_modules y archivos generados
+- [x] Fix: .gitignore corregido para excluir node_modules y archivos generados
 
 ### 3. Sanity Studio
 - [x] Studio desplegado en https://toflipop-studio.sanity.studio/
@@ -27,67 +27,99 @@
 - [x] Dataset limpio: solo `toflipop-production`
 - [x] Schemas configurados: product, post, blockContent
 
-### 4. Frontend - Catálogo de Productos (NUEVO ✅)
+### 4. Frontend - Catálogo de Productos
 - [x] `src/sanity/lib/products.ts` - Cliente Sanity + funciones para obtener productos
 - [x] `src/components/ProductCard.tsx` - Componente tarjeta de producto (diseño pastel)
 - [x] `src/app/page.tsx` - Página principal con catálogo conectado a Sanity
 - [x] `src/app/product/[slug]/page.tsx` - Página de detalle de producto
 - [x] Build exitoso y desplegado en rama `dev`
-- [x] Servidor local funcionando en http://localhost:3000
+
+### 5. Contenido en Sanity
+- [x] Primer producto "Prueba 1" publicado y visible
+  - ✅ Corregido: Campo `mainImage` → `image` en las consultas GROQ
+  - ✅ Corregido: Dataset privado → añadido token al cliente de lectura
+  - ✅ Corregido: CDN cache → cambiado `useCdn: false`
+
+### 6. Carrito de Compras (NUEVO ✅)
+- [x] `src/contexts/CartContext.tsx` - Contexto React para el estado del carrito
+- [x] `src/components/CartIcon.tsx` - Icono del carrito con badge de cantidad
+- [x] `src/components/AddToCartButton.tsx` - Botón añadir al carrito con feedback visual
+- [x] `src/app/cart/page.tsx` - Página del carrito con resumen de pedido
+- [x] Carrito persistente con localStorage
+- [x] Funcionalidades: añadir, eliminar, actualizar cantidad, vaciar carrito
+- [x] Cálculo automático de subtotal, envío y total
+- [x] Envío gratuito en pedidos +€50
+
+### 7. Navegación y Layout (NUEVO ✅)
+- [x] `src/components/Header.tsx` - Header sticky con navegación
+- [x] `src/components/Footer.tsx` - Footer completo con enlaces legales y redes sociales
+- [x] Layout actualizado con CartProvider, Header y Footer
+
+### 8. Páginas Legales (NUEVO ✅)
+- [x] `/legal/aviso-legal` - Aviso Legal (LSSI-CE)
+- [x] `/legal/privacidad` - Política de Privacidad (RGPD completo)
+- [x] `/legal/cookies` - Política de Cookies
+- [x] `/legal/terminos` - Términos y Condiciones
+- [x] `/legal/devoluciones` - Política de Devoluciones (14 días, envío gratis)
+
+### 9. Páginas de Contenido (NUEVO ✅)
+- [x] `/about` - Sobre nosotros
+- [x] `/contact` - Contacto con FAQ
+
+### 10. Blog (NUEVO ✅)
+- [x] `/blog` - Página de listado de posts
+- [x] `/blog/[slug]` - Posts individuales con PortableText
+- [x] Sanitized PortableText para seguridad
 
 ---
 
 ## 🟡 En Progreso
 
-### 5. Contenido en Sanity
-- [x] **RESUELTO:** Primer producto "Prueba 1" publicado y visible
-  - ✅ Corregido: Campo `mainImage` → `image` en las consultas GROQ (3 lugares)
-  - ✅ Corregido: Dataset privado → añadido token al cliente de lectura
-  - ✅ Corregido: CDN cache → cambiado `useCdn: false`
-  - Producto visible con imagen, precio (€12), categoría (notebook)
-  - Studio: https://toflipop-studio.sanity.studio/
+### 11. Integración de Pagos con Stripe
+- [x] Instalar stripe + @stripe/stripe-js
+- [x] Configurar claves de test en .env.local
+- [x] Crear API route /api/checkout
+- [x] Crear página /success con Tofli feliz 🎉
+- [x] Crear página /cancelled con Tofli llorando 🥺
+- [x] Conectar botón "Continuar al pago" con API
+- [x] **Corregido:** Error "url_invalid" → cambiado localhost por 127.0.0.1
+- [x] Probar flujo completo de pago (con tarjeta test 4242...)
+- [x] Schema `order` creado en Sanity
+- [x] Webhook `/api/webhooks/stripe` creado
+- [x] Checkout actualizado para enviar items en metadata
+- [ ] Configurar STRIPE_WEBHOOK_SECRET + conectar con Stripe Dashboard (PENDIENTE)
+- [ ] Probar webhook end-to-end (PENDIENTE)
 
-### 6. Desarrollo del Frontend
-- [ ] Carrito de compras
-- [ ] Proceso de checkout con Stripe
-- [ ] Diseño responsive para móviles
-- [ ] Páginas de contenido (About, Contact, FAQ)
-
-### 7. Integración de Pagos
-- [ ] Configurar Stripe en modo test
-- [ ] Implementar flujo de pago completo
-- [ ] Webhooks para confirmación de pedidos
-- [ ] Página de confirmación de pedido
+### 15. Cumplimiento Legal RGPD
+- [x] Checkbox obligatorio de términos y condiciones en carrito
+- [x] Enlaces a política de privacidad y términos en el checkout
+- [x] Autorización explícita de tratamiento de datos
+- [x] Colores de error en paleta pastel (no rojos)
+- [x] Confirmación antes de eliminar producto del carrito
 
 ---
 
 ## 🔵 Pendiente
 
-### 8. Optimización SEO
-- [ ] Meta tags y Open Graph para cada página
-- [ ] Sitemap.xml
-- [ ] Robots.txt
-- [ ] Schema.org markup para productos
+### 12. Optimización SEO
+- [x] Meta tags y Open Graph mejorados (layout.tsx)
+- [x] Sitemap.xml dinámico (productos + blog + páginas estáticas)
+- [x] Robots.txt configurado
+- [x] Schema.org JSON-LD para productos (precio, disponibilidad, marca)
+- [x] Meta tags dinámicos por producto (title, description, OG image, canonical)
+- [x] Twitter Cards configuradas
+- [x] Viewport y theme-color optimizados
 - [ ] Optimización de imágenes (next/image)
 - [ ] Velocidad de carga y Core Web Vitals
 
-### 9. Cumplimiento Legal (España)
-- [ ] Política de privacidad (RGPD)
-- [ ] Términos y condiciones
-- [ ] Política de cookies
-- [ ] Banner de cookies compliant
-- [ ] Aviso legal (LSSI-CE)
-- [ ] Política de devoluciones
-- [ ] Datos de la empresa visibles
-
-### 10. Marketing y Analítica
+### 13. Marketing y Analítica
 - [ ] Google Analytics / Google Tag Manager
 - [ ] Facebook Pixel (opcional)
 - [ ] Integración con email marketing
 - [ ] Redes sociales (Instagram, TikTok)
 - [ ] Cupones y descuentos
 
-### 11. Testing y Lanzamiento
+### 14. Testing y Lanzamiento
 - [ ] Testing en dispositivos móviles
 - [ ] Testing del proceso de compra completo
 - [ ] Corrección de bugs
@@ -108,21 +140,61 @@
 - Footer: "Hecho con 💕 por Penélope Garcia para Toflipop"
 
 ### Tecnologías
-- **Framework:** Next.js 15
+- **Framework:** Next.js 16
 - **CMS:** Sanity (cloud) - Studio: https://toflipop-studio.sanity.studio/
 - **Pagos:** Stripe
 - **Hosting:** Vercel
 - **Dominio:** Porkbun
+
+### Problemas Resueltos Hoy
+- ✅ **Sanity "Unauthorized"**: Token actualizado en .env.local
+- ✅ **Stripe "url_invalid"**: Cambiado `localhost:3000` → `127.0.0.1:3000` en success_url y cancel_url
+
+---
+
+## 📝 Resumen de Sesión (26 de mayo de 2026)
+
+### Diseño y UI
+- ✅ **Footer rediseñado completo:** Secciones de Tienda, Info Legal, Contacto y Redes Sociales
+- ✅ **Iconos de contacto:** Email (90x90px) y Ubicación (60x90px pin), texto text-lg, gap-1
+- ✅ **Redes sociales en footer:** Instagram, TikTok, Facebook con iconos SVG
+- ✅ **Colores pastel 100%:** Eliminados TODOS los colores rojos/verdes de toda la web
+- ✅ **Paleta pastel consistente:** hover pastel en productos, carrito, botones, links
+
+### Funcionalidad
+- ✅ **Carrito arreglado:** allowedDevOrigins en next.config.js para Stripe en WSL
+- ✅ **Stock corregido:** Solo muestra aviso cuando ≤7 unidades, fondo naranja pastel
+- ✅ **Checkbox RGPD obligatorio** en página de carrito
+- ✅ **Schema `order`** creado en Sanity para guardar pedidos
+- ✅ **Webhook Stripe** `/api/webhooks/stripe` creado
+
+### Páginas
+- ✅ **Blog completo:** Listado + posts individuales con PortableText
+- ✅ **Páginas legales:** Aviso Legal, Privacidad, Cookies, Términos, Devoluciones
+- ✅ **Sobre nosotros** y **Contacto con FAQ**
+- ✅ **Páginas Success/Cancelled** con imágenes de Tofli (gato feliz 🎉 / llorando 🥺)
+
+### Contenido
+- ✅ Correo actualizado a holatoflipop@gmail.com en toda la web
+- ✅ Primer producto "Prueba 1" creado y visible
+- ✅ Imágenes de Tofli subidas a public/images/
 
 ---
 
 ## 🎯 Próximos Pasos Inmediatos
 
 1. **HECHO:** Primer producto creado y visible ✅
-2. **PRÓXIMO:** Vanina crea más productos (3-5 para tener catálogo completo)
-3. **TERCERO:** Implementar carrito de compras
-4. **CUARTO:** Checkout con Stripe
-5. **QUINTO:** Deploy a producción (merge dev -> main)
+2. **HECHO:** Carrito de compras funcional ✅
+3. **HECHO:** Páginas legales completas ✅
+4. **HECHO:** Blog completo (listado + posts individuales con PortableText) ✅
+5. **HECHO:** Correo actualizado a holatoflipop@gmail.com ✅
+6. **HECHO:** Stripe integrado (API + páginas + botón conectado) ✅
+7. **HECHO:** Imágenes de Tofli en /success y /cancelled ✅
+8. **HECHO:** Schema `order` en Sanity ✅
+9. **HECHO:** Webhook `/api/webhooks/stripe` creado ✅
+10. **PRÓXIMO:** Configurar STRIPE_WEBHOOK_SECRET + conectar con Stripe Dashboard
+11. **PRÓXIMO:** Probar webhook end-to-end (con ngrok para local)
+12. **SIGUIENTE:** Deploy a producción (merge dev -> main)
 
 ---
 

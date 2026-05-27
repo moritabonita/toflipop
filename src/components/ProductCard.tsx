@@ -1,23 +1,28 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import AddToCartButton from '@/components/AddToCartButton'
 
 interface ProductCardProps {
   name: string
   slug: { current: string }
   price: number
   category: string
-  imageUrl?: string
+  imageUrls: string[]
+  _id: string
 }
 
-export default function ProductCard({ name, slug, price, category, imageUrl }: ProductCardProps) {
+export default function ProductCard({ name, slug, price, category, imageUrls, _id }: ProductCardProps) {
+  const mainImage = imageUrls[0]
   return (
-    <Link href={`/product/${slug.current}`} className="group">
+    <div className="group">
       <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-pastel-lavender/50">
         {/* Imagen del producto */}
-        <div className="relative aspect-square bg-gradient-to-br from-pastel-pink/20 to-pastel-purple/20">
-          {imageUrl ? (
+        <Link href={`/product/${slug.current}`} className="block relative aspect-square bg-gradient-to-br from-pastel-pink/20 to-pastel-purple/20">
+          {mainImage ? (
             <Image
-              src={imageUrl}
+              src={mainImage}
               alt={name}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -34,23 +39,42 @@ export default function ProductCard({ name, slug, price, category, imageUrl }: P
               {category === 'notebook' ? '📒 Anotador' : category === 'sticker' ? '✨ Sticker' : '🎁 Pack'}
             </span>
           </div>
-        </div>
+
+          {/* Badge de número de fotos */}
+          {imageUrls.length > 1 && (
+            <div className="absolute top-3 left-3">
+              <span className="bg-black/60 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-full flex items-center gap-1">
+                📷 {imageUrls.length}
+              </span>
+            </div>
+          )}
+        </Link>
 
         {/* Info del producto */}
         <div className="p-5">
-          <h3 className="text-lg font-semibold text-neutral-800 mb-2 group-hover:text-pastel-purple transition-colors">
-            {name}
-          </h3>
+          <Link href={`/product/${slug.current}`}>
+            <h3 className="text-lg font-semibold text-neutral-800 mb-2 group-hover:text-pastel-purple transition-colors">
+              {name}
+            </h3>
+          </Link>
           <div className="flex items-center justify-between">
             <span className="text-2xl font-bold bg-gradient-to-r from-pastel-pink to-pastel-purple bg-clip-text text-transparent">
               €{price.toFixed(2)}
             </span>
-            <button className="bg-gradient-to-r from-pastel-pink to-pastel-purple text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-lg transition-all duration-300">
-              Ver detalles →
-            </button>
+          </div>
+          
+          {/* Botón añadir al carrito */}
+          <div className="mt-4">
+            <AddToCartButton
+              productId={_id}
+              productName={name}
+              productPrice={price}
+              productImageUrl={mainImage}
+              variant="small"
+            />
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
