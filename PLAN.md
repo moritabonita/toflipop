@@ -1,8 +1,8 @@
 # 🛍️ Plan de Desarrollo - Toflipop
 
-**Última actualización:** 27 de mayo de 2026 - Build exitoso en producción local, todos los errores de TypeScript corregidos
-**Estado general:** 🟢 Servidor producción corriendo en http://172.31.82.232:3000
-**Última conversación:** Corregidos errores de tipado de params en Next.js 16 (blog/[slug], product/[slug]), eliminado archivo residual config.ts. Build 17/17 páginas OK.
+**Última actualización:** 27 de mayo de 2026 - SEO completado, imágenes optimizadas con next/image, metadata mejorado, robots no-index en páginas de pago
+**Estado general:** 🟢 Build exitoso, todo en rama dev
+**Última conversación:** Optimización de imágenes (Footer.tsx), formats AVIF/WebP en next.config, metadata en success/cancelled pages, robots no-index en páginas de pago
 
 ---
 
@@ -109,8 +109,8 @@
 - [x] Meta tags dinámicos por producto (title, description, OG image, canonical)
 - [x] Twitter Cards configuradas
 - [x] Viewport y theme-color optimizados
-- [ ] Optimización de imágenes (next/image)
-- [ ] Velocidad de carga y Core Web Vitals
+- [x] Optimización de imágenes (next/image)
+- [x] Velocidad de carga y Core Web Vitals
 
 ### 13. Marketing y Analítica
 - [ ] Google Analytics / Google Tag Manager
