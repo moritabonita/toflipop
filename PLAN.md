@@ -1,8 +1,8 @@
 # 🛍️ Plan de Desarrollo - Toflipop
 
-**Última actualización:** 27 de mayo de 2026 - SEO completado, imágenes optimizadas con next/image, metadata mejorado, robots no-index en páginas de pago
+**Última actualización:** 27 de mayo de 2026 - Google Analytics + RGPD completado, imágenes optimizadas, metadata mejorado, bugs corregidos
 **Estado general:** 🟢 Build exitoso, todo en rama dev
-**Última conversación:** Optimización de imágenes (Footer.tsx), formats AVIF/WebP en next.config, metadata en success/cancelled pages, robots no-index en páginas de pago
+**Última conversación:** Google Analytics G-SRLQ5GVZXW configurado, sistema de cookies RGPD completo (CookieContext + CookieBanner), optimización de imágenes, fix errores de hidratación
 
 ---
 
@@ -113,7 +113,12 @@
 - [x] Velocidad de carga y Core Web Vitals
 
 ### 13. Marketing y Analítica
-- [ ] Google Analytics / Google Tag Manager
+- [x] Google Analytics / Google Tag Manager (ID: G-SRLQ5GVZXW)
+  - ✅ CookieContext.tsx - Gestión de preferencias RGPD
+  - ✅ CookieBanner.tsx - Banner de consentimiento con toggles
+  - ✅ GoogleAnalytics.tsx - Solo carga con consentimiento
+  - ✅ Layout actualizado con CookieProvider
+  - ✅ NEXT_PUBLIC_GA_ID configurado en .env.local
 - [ ] Facebook Pixel (opcional)
 - [ ] Integración con email marketing
 - [ ] Redes sociales (Instagram, TikTok)
@@ -149,6 +154,33 @@
 ### Problemas Resueltos Hoy
 - ✅ **Sanity "Unauthorized"**: Token actualizado en .env.local
 - ✅ **Stripe "url_invalid"**: Cambiado `localhost:3000` → `127.0.0.1:3000` en success_url y cancel_url
+
+---
+
+## 📝 Resumen de Sesión (27 de mayo de 2026)
+
+### SEO y Rendimiento
+- ✅ **next.config.ts:** Formats AVIF/WebP, minimumCacheTTL, deviceSizes, compress
+- ✅ **Footer.tsx:** 3 imágenes <img> → <Image> de Next.js (contacto, ubicación, made-with-love)
+- ✅ **Metadata mejorado:** /success y /cancelled con title, description, robots no-index
+- ✅ **Fix viewport:** Eliminado themeColor (no soportado en Next.js 16)
+
+### Google Analytics + RGPD
+- ✅ **CookieContext.tsx:** Gestión de preferencias (necessary, analytics, marketing)
+- ✅ **CookieBanner.tsx:** Banner con "Aceptar todas", "Rechazar todas", "Configurar"
+- ✅ **GoogleAnalytics.tsx:** Solo carga si hasConsent('analytics')
+- ✅ **Layout actualizado:** CookieProvider envuelve toda la app
+- ✅ **GA ID configurado:** G-SRLQ5GVZXW en .env.local
+- ✅ **Bug corregido:** hasConsentGiven para mostrar/ocultar banner correctamente
+
+### Errores Corregidos
+- ✅ **<p> anidado en Footer:** Cambiado a <br /> (error de hidratación)
+- ✅ **themeColor en viewport:** Eliminado (no soportado en Next.js 16)
+
+### Archivos Nuevos
+- `src/contexts/CookieContext.tsx`
+- `src/components/CookieBanner.tsx`
+- `src/components/GoogleAnalytics.tsx`
 
 ---
 
@@ -192,9 +224,12 @@
 7. **HECHO:** Imágenes de Tofli en /success y /cancelled ✅
 8. **HECHO:** Schema `order` en Sanity ✅
 9. **HECHO:** Webhook `/api/webhooks/stripe` creado ✅
-10. **PRÓXIMO:** Configurar STRIPE_WEBHOOK_SECRET + conectar con Stripe Dashboard
-11. **PRÓXIMO:** Probar webhook end-to-end (con ngrok para local)
-12. **SIGUIENTE:** Deploy a producción (merge dev -> main)
+10. **HECHO:** SEO completo (meta tags, sitemap, robots, Schema.org, imágenes) ✅
+11. **HECHO:** Google Analytics + RGPD (CookieBanner, CookieContext, GA ID configurado) ✅
+12. **PRÓXIMO:** Configurar STRIPE_WEBHOOK_SECRET + conectar con Stripe Dashboard
+13. **PRÓXIMO:** Probar webhook end-to-end (con ngrok para local)
+14. **PRÓXIMO:** Deploy a producción (merge dev -> main)
+15. **PRÓXIMO:** Configurar NEXT_PUBLIC_GA_ID en Vercel Environment Variables
 
 ---
 
